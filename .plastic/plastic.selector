@@ -1,0 +1,4 @@
+repository "FPS Educational@Padure@cloud"
+  path "/"
+    br "/main"
+    co "/main"

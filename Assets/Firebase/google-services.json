@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "245272490347",
+    "firebase_url": "https://virtual-lab-f8389-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "virtual-lab-f8389",
+    "storage_bucket": "virtual-lab-f8389.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245272490347:android:a14aa5ec14e20db6945c2e",
+        "android_client_info": {
+          "package_name": "com.SM.VirtualLab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245272490347-06jb1d80kp9inj597lqtuc390ps14pva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBNI0MRUcbYpAhv_Ctw2s6I4F78swQ45U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245272490347-06jb1d80kp9inj597lqtuc390ps14pva.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
