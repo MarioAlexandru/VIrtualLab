@@ -21,7 +21,7 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Awake()
     {
-        isMobileEnabled = player.GetComponent<FPSControler>().isMobileEnabled;
+        if(player != null) isMobileEnabled = player.GetComponent<FPSControler>().isMobileEnabled;
 
         eventSystem = FindObjectOfType<EventSystem>();
         tooltipController = FindObjectOfType<STController>();
