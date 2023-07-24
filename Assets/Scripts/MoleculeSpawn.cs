@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MoleculeSpawn : MonoBehaviour
 {
+    [Header("Spawner")]
+    public GameObject moleculeSpawner;
+
+    [Header("Molecules")]
     public GameObject H2O;
     public GameObject NaCl;
     public GameObject propan;
@@ -16,34 +20,35 @@ public class MoleculeSpawn : MonoBehaviour
     //-9,2.5,1.5
     public void spawnH2O()
     {
-        Instantiate(H2O, new Vector3(-9,2,1), Quaternion.identity);
+        //Instantiate(H2O, new Vector3(-9,2,1), Quaternion.identity);
+        Instantiate(H2O, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnNaCl()
     {
-        Instantiate(NaCl, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(NaCl, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnpropan()
     {
-        Instantiate(propan, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(propan, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnmetanol()
     {
-        Instantiate(metanol, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(metanol, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnmetan()
     {
-        Instantiate(metan, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(metan, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnHCl()
     {
-        Instantiate(HCl, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(HCl, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnetanol()
     {
-        Instantiate(etanol, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(etanol, moleculeSpawner.transform.position, Quaternion.identity);
     }
     public void spawnNH3()
     {
-        Instantiate(NH3, new Vector3(-9, 2, 1), Quaternion.identity);
+        Instantiate(NH3, moleculeSpawner.transform.position, Quaternion.identity);
     }
 }

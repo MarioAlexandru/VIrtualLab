@@ -23,12 +23,18 @@ public class PickUpMobile : MonoBehaviour
 
     [SerializeField]
     private LayerMask layerMask;
-    public bool canPickupMobile;
-    public bool canDropMobile;
-    public bool canRotateRightMobile;
-    public bool canRotateLeftMobile;
-    public bool canThrowMobile;
-    public bool pickedUp = false;
+
+    [HideInInspector]
+    public bool canPickupMobile,
+        canDropMobile,
+        canRotateRightMobile,
+        canRotateLeftMobile,
+        canThrowMobile,
+        pickedUp = false;
+
+    [SerializeField]
+    private bool canThrow,canPlay;
+
     private FPSControler mouseLookScript;
     void Start()
     {
@@ -41,35 +47,34 @@ public class PickUpMobile : MonoBehaviour
         RaycastHit hit;
         if (canPickupMobile)
         {
-            if (heldObj == null) //if currently not holding anything
+            if (heldObj == null)
             {
-                //perform raycast to check if player is looking at object within pickuprange
-                
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                 {
                     if (hit.transform.gameObject.tag == "canPickup")
                     {
-                        //pass in object hit into the PickUpObject function
-
                         PickUpObject(hit.transform.gameObject);
                     }
 
                 }
             }  
         }
-        if (heldObj != null) //if player is holding object
+        if (heldObj != null)
         {
-            MoveObject(); //keep object position at holdPos
+            MoveObject();
             RotateObjectMobile();
             if (canThrowMobile)
             {
                 StopClipping();
-                //ThrowObject();
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange,layerMask))
+                if (canThrow) ThrowObject();
+                else
                 {
-                    if (hit.transform.gameObject.tag == "placePos")
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange, layerMask))
                     {
-                        PlaceObject(hit.rigidbody.gameObject);
+                        if (hit.transform.gameObject.tag == "placePos")
+                        {
+                            PlaceObject(hit.rigidbody.gameObject);
+                        }
                     }
                 }
             }
@@ -82,15 +87,18 @@ public class PickUpMobile : MonoBehaviour
     }
     void PickUpObject(GameObject pickUpObj)
     {
-        if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
+        if (pickUpObj.GetComponent<Rigidbody>())
         {
-            heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
+            heldObj = pickUpObj;
             pickedUp = true;
-            heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
+            heldObjRb = pickUpObj.GetComponent<Rigidbody>();
             heldObjRb.isKinematic = true;
-            heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
-            heldObj.layer = LayerNumber; //change the object layer to the holdLayer
-            
+            heldObjRb.transform.parent = holdPos.transform;
+            heldObj.layer = LayerNumber;
+            if(canPlay)
+            {
+                playButton.SetActive(true);
+            }
             dropIcon.SetActive(true);
             throwIcon.SetActive(true);
             grabIcon.SetActive(false);
@@ -102,7 +110,6 @@ public class PickUpMobile : MonoBehaviour
             {
                 if(scenemanager.minigameName == null) playButton.SetActive(true);
             }
-            //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
             if(heldObj.GetComponent<SimpleTooltip>()) heldObj.GetComponent<SimpleTooltip>().ShowTooltip();
         }
@@ -115,7 +122,6 @@ public class PickUpMobile : MonoBehaviour
     }
     void DropObject()
     {
-        //re-enable collision with player
         if(heldObj != null)
         {
             pickedUp = false;
@@ -123,22 +129,22 @@ public class PickUpMobile : MonoBehaviour
             dropIcon.SetActive(false);
             throwIcon.SetActive (false);
             grabIcon.SetActive(true);
+            if (canPlay) playButton.SetActive(false);
             canPickupMobile = false;
             canDropMobile = false;
             canThrowMobile = false;
             if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
-            heldObj.layer = 0; //object assigned back to default layer
+            heldObj.layer = 0;
             heldObjRb.isKinematic = false;
-            heldObj.transform.parent = null; //unparent object
-            heldObj = null; //undefine game object
+            heldObj.transform.parent = null;
+            heldObj = null;
         }
         
     }
 
     void MoveObject()
     {
-        //keep object position the same as the holdPosition position
         heldObj.transform.position = holdPos.transform.position;
     }
 
@@ -146,16 +152,15 @@ public class PickUpMobile : MonoBehaviour
     {
         if(canRotateRightMobile)
         {
-             heldObj.transform.Rotate(0,0,-10);
+             heldObj.transform.Rotate(0,0,-1);
         }
         else if(canRotateLeftMobile)
         {
-            heldObj.transform.Rotate(0, 0, 10);
+            heldObj.transform.Rotate(0, 0, 1);
         }
     }
     void ThrowObject()
     {
-        //same as drop function, but add force to object before undefining it
         pickedUp = false;
         if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
@@ -179,7 +184,6 @@ public class PickUpMobile : MonoBehaviour
         if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
-        //heldObj.transform.parent = placePosition.transform;
         heldObj.transform.parent = null;
         heldObj.transform.localPosition = new Vector3(-1.98f, 1.766f, -0.6849f);
         heldObj.transform.localEulerAngles = new Vector3(0, 5.94f, 0);
@@ -192,7 +196,7 @@ public class PickUpMobile : MonoBehaviour
         canDropMobile = false;
         canThrowMobile = false;
     }
-    void StopClipping() //function only called when dropping/throwing
+    void StopClipping()
     {
         if(heldObj != null)
         {

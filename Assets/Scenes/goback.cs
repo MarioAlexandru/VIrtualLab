@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class goback : MonoBehaviour
 {
-
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

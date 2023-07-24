@@ -31,7 +31,7 @@ public class scenemanager : MonoBehaviour
         }
         else if(startStoreMinigame)
         {
-            SceneManager.LoadScene("Joculet");
+            SceneManager.LoadScene("JoculetMobile");
         }
     }
 }

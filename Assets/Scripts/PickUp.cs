@@ -11,16 +11,19 @@ public class PickUp : MonoBehaviour
     public GameObject player;
     public scenemanager scenemanager;
     public Transform holdPos;
-    //private GameObject holdPosCpy;
     public float throwForce = 500f;
     public float pickUpRange = 5f;
     private GameObject heldObj;
     private Rigidbody heldObjRb;
 
-    private bool canDrop = true;
+    private bool canDrop = false;
     private int LayerNumber;
 
-    public bool pickedUp = false;
+    [SerializeField]
+    private LayerMask LayerMaskPlayer;
+
+    [SerializeField]
+    private bool canThrow;
 
     FPSControler mouseLookScript;
     void Start()
@@ -31,20 +34,14 @@ public class PickUp : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Input.GetKeyDown(KeyCode.F)) //change E to whichever key you want to press to pick up
-        {
-            
-            if (heldObj == null) //if currently not holding anything
+        if (Input.GetKeyDown(KeyCode.F))
+        { 
+            if (heldObj == null)
             {
-                //perform raycast to check if player is looking at object within pickuprange
-                
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange,~LayerMaskPlayer))
                 {
                     if (hit.transform.gameObject.tag == "canPickup")
                     {
-                        //pass in object hit into the PickUpObject function
-
                         PickUpObject(hit.transform.gameObject);
                     }
 
@@ -59,41 +56,39 @@ public class PickUp : MonoBehaviour
                 }
             }
         }
-        if (heldObj != null) //if player is holding object
+        if (heldObj != null)
         {
-            MoveObject(); //keep object position at holdPos
+            MoveObject();
             RotateObject();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canDrop == true) //Mous0 (leftclick) is used to throw, change this if you want another button to be used)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 StopClipping();
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+                if (canThrow) ThrowObject();
+                else
                 {
-                    if (hit.transform.gameObject.tag == "placePos")
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                     {
-                        Debug.Log("Hit Position!");
-                        PlaceObject(hit.rigidbody.gameObject);
+                        if (hit.transform.gameObject.tag == "placePos")
+                        {
+                            PlaceObject(hit.rigidbody.gameObject);
+                        }
                     }
                 }
-                //ThrowObject();
             }
-
         }
     }
     void PickUpObject(GameObject pickUpObj)
     {
-        if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
+        if (pickUpObj.GetComponent<Rigidbody>())
         {
-            
-            //holdPosCpy = Instantiate(holdPos.gameObject,holdPos.transform);
-            heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
-            pickedUp = true;
-            heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
+            heldObj = pickUpObj;
+            heldObjRb = pickUpObj.GetComponent<Rigidbody>();
             heldObjRb.isKinematic = true;
-            heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
-            heldObj.layer = LayerNumber; //change the object layer to the holdLayer
+            heldObjRb.transform.parent = holdPos.transform;
+            heldObj.layer = LayerNumber;
             if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = heldObj.GetComponent<MinigameTracker>().minigameName;
-            //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
+            canDrop = true;
         }
         if (heldObj != null)
         {
@@ -103,17 +98,15 @@ public class PickUp : MonoBehaviour
     }
     void DropObject()
     {
-        //re-enable collision with player
         if (heldObj != null)
         {
-            pickedUp = false;
             if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
-            heldObj.layer = 0; //object assigned back to default layer
+            heldObj.layer = 0;
             heldObjRb.isKinematic = false;
-            heldObj.transform.parent = null; //unparent object
-            //Destroy(holdPosCpy);
-            heldObj = null; //undefine game object
+            heldObj.transform.parent = null;
+            heldObj = null;
+            canDrop = false;
         }
     }
 
@@ -125,53 +118,29 @@ public class PickUp : MonoBehaviour
 
     void RotateObject()
     {
-        ///Og Code
-        //if (Input.GetKey(KeyCode.R))//hold R key to rotate, change this to whatever key you want
-        //{
-        //    mouseLookScript.lookSpeed = 0f;
-        //
-        //    float XaxisRotation = Input.GetAxis("Mouse X") * rotationSensitivity;
-        //    float YaxisRotation = Input.GetAxis("Mouse Y") * rotationSensitivity;
-        //    //rotate the object depending on mouse X-Y Axis
-        //    heldObj.transform.Rotate(Vector3.down, XaxisRotation);
-        //    heldObj.transform.Rotate(Vector3.right, YaxisRotation);
-        //}
-        //else
-        //{
-        //    //re-enable player being able to look around
-        //    //mouseLookScript.verticalSensitivity = originalvalue;
-        //    //mouseLookScript.lateralSensitivity = originalvalue;
-        //    mouseLookScript.lookSpeed = 2f;
-        //    canDrop = true;
-        //}
         if (Input.GetKey(KeyCode.E))
         {
-            heldObj.transform.Rotate(0, -0.5f, 0);
+            heldObj.transform.Rotate(0, -1f, 0);
         }
         if(Input.GetKey(KeyCode.Q)) 
         {
-            heldObj.transform.Rotate(0, 0.5f, 0);
+            heldObj.transform.Rotate(0, 1f, 0);
         }
-        //if (Input.GetAxis("Mouse ScrollWheel") > 0 )
-        //{
-        //    holdPosCpy.transform.Translate(Vector3.forward * 50 * Time.deltaTime);
-        //}
-        //else if(Input.GetAxis("Mouse ScrollWheel") < 0)
-        //{
-        //    holdPosCpy.transform.Translate(Vector3.forward * -50 * Time.deltaTime);
-        //}
+        if(Input.GetKey(KeyCode.R))
+        {
+            heldObj.transform.Rotate(1,0,0);
+        }
     }
     void ThrowObject()
     {
-        //same as drop function, but add force to object before undefining it
         if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
         heldObjRb.isKinematic = false;
         heldObj.transform.parent = null;
         heldObjRb.AddForce(transform.forward * throwForce);
-        //Destroy(holdPosCpy);
         heldObj = null;
+        canDrop = false;
     }
     void PlaceObject(GameObject placePosition)
     {
@@ -181,10 +150,10 @@ public class PickUp : MonoBehaviour
         heldObj.transform.parent = null;
         heldObj.transform.localPosition = new Vector3(-1.98f, 1.766f, -0.6849f);
         heldObj.transform.localEulerAngles = new Vector3(0, 5.94f, 0);
-        //Destroy(holdPosCpy);
         heldObj = null;
+        canDrop = false;
     }
-    void StopClipping() //function only called when dropping/throwing
+    void StopClipping()
     {
         if(heldObj != null)
         {
