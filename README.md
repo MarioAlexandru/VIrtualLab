@@ -2,7 +2,7 @@
 VirtualLab
 Linkul pentru versiunea VR: https://github.com/MarioAlexandru/VRLab
 
-    Am vrut sa ne bazam in primul rand pe chimie, nu doar pentru ca este materia care da furca multor elevi, dar pentru ca este un subiect care are toate implicatiile in viata reala, cu experimente, observatii...Asa ca am ales Unity, deoarece are multe module de aplicabilitate, Mobile, Desktop, VR.
+   Am vrut sa ne bazam in primul rand pe chimie, nu doar pentru ca este materia care da furca multor elevi, dar pentru ca este un subiect care are toate implicatiile in viata reala, cu experimente, observatii...Asa ca am ales Unity, deoarece are multe module de aplicabilitate, Mobile, Desktop, VR.
 Acest repository contine si versiunea de mobil si cea de PC.
     Tehnologii folosite:
 Firebase:
