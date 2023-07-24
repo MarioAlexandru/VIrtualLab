@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class FPSControler : MonoBehaviour
 {
-    public GameObject canvas;
+    public GameObject canvas = null;
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -29,7 +29,7 @@ public class FPSControler : MonoBehaviour
     CharacterController characterController;
     void Start()
     {
-        canvas.SetActive(false);
+        if (canvas != null) canvas.SetActive(false);
         characterController = GetComponent<CharacterController>();
 
         if(!isMobileEnabled) 
@@ -104,7 +104,7 @@ public class FPSControler : MonoBehaviour
 
             if (canMove)
             {
-                lookSpeed = 0.025f;
+                lookSpeed = 0.01f;
                 rotationX += look.y * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
                 playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

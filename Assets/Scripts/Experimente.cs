@@ -5,7 +5,6 @@ public class Experimente : MonoBehaviour
 {
     RaycastHit hit;
     Ray ray;
-    float distance = 10;
 
     void Update()
     {

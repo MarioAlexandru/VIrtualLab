@@ -21,7 +21,7 @@ public class STController : MonoBehaviour
     {
         // Load up both text layers
         player = GameObject.Find("Player");
-        isMobileEnabled = player.GetComponent<FPSControler>().isMobileEnabled;
+        if(player != null) isMobileEnabled = player.GetComponent<FPSControler>().isMobileEnabled;
         var tmps = GetComponentsInChildren<TextMeshProUGUI>();
         for(int i = 0; i < tmps.Length; i++)
         {

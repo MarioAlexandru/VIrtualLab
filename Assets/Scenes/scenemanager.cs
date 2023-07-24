@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class scenemanager : MonoBehaviour
 {
     public GameObject player;
+    [HideInInspector]
     public string minigameName;
-    public bool startMinigame = false;
+    [HideInInspector] 
+    public bool startMinigame = false, startStoreMinigame = false;
     private bool isMobileEnabled;
 
     private void Start()
@@ -18,26 +20,18 @@ public class scenemanager : MonoBehaviour
     {
         if(!isMobileEnabled)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                SceneManager.LoadScene("FaucetAndBucket");
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                SceneManager.LoadScene("FluidMaze");
-            }
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                SceneManager.LoadScene("Joculet");
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene(minigameName);
             }
         }
         else if(startMinigame)
         {
             SceneManager.LoadScene(minigameName);
+        }
+        else if(startStoreMinigame)
+        {
+            SceneManager.LoadScene("Joculet");
         }
     }
 }

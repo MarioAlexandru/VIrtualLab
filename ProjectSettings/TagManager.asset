@@ -17,6 +17,11 @@ TagManager:
   - carbon
   - natrium
   - carte
+  - Water
+  - Element
+  - Flame
+  - canTurn
+  - placePos
   layers:
   - Default
   - TransparentFX
@@ -25,8 +30,8 @@ TagManager:
   - Water
   - UI
   - HoldLayer
-  - 
-  - 
+  - PlaceLayer
+  - Rod
   - 
   - 
   - 

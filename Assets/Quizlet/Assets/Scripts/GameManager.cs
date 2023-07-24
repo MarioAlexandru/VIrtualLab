@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private Text factText;
 
-	[SerializeField]
-	private float timeBetweenQuestions = 1.0f ;
+	//[SerializeField]
+	//private float timeBetweenQuestions = 1.0f ;
 
 	[SerializeField]
 	private Text trueAnswerText, falseAnswerText;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
 
 	void SetCurrentQuestion()
 	{
-		int randomQuestionsIndex = Random.Range (0,13);
+		int randomQuestionsIndex = Random.Range (0,questions.Length);
 		currentQuestion = questions [randomQuestionsIndex];
 
 		if (currentQuestion.isTrue) {

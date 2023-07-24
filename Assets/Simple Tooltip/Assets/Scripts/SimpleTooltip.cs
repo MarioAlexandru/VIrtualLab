@@ -56,7 +56,7 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         else
         {
-            pickedUp = player.GetComponentInChildren<PickUp>().pickedUp;
+            pickedUp = player.GetComponentInChildren<PickUpMobile>().pickedUp;
             if (!pickedUp)
             {
                 if (isUIObject) return;
