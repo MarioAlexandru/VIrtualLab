@@ -11,10 +11,9 @@ public class PickUp : MonoBehaviour
     public GameObject player;
     public scenemanager scenemanager;
     public Transform holdPos;
-    private GameObject holdPosCpy;
+    //private GameObject holdPosCpy;
     public float throwForce = 500f;
     public float pickUpRange = 5f;
-    //private float rotationSensitivity = 2f;
     private GameObject heldObj;
     private Rigidbody heldObjRb;
 
@@ -53,7 +52,6 @@ public class PickUp : MonoBehaviour
             }
             else
             {
-                
                 if (canDrop == true)
                 {
                     StopClipping();
@@ -86,16 +84,21 @@ public class PickUp : MonoBehaviour
         if (pickUpObj.GetComponent<Rigidbody>()) //make sure the object has a RigidBody
         {
             
-            holdPosCpy = Instantiate(holdPos.gameObject,holdPos.transform);
+            //holdPosCpy = Instantiate(holdPos.gameObject,holdPos.transform);
             heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
             pickedUp = true;
             heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
             heldObjRb.isKinematic = true;
-            heldObjRb.transform.parent = holdPosCpy.transform; //parent object to holdposition
+            heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
             heldObj.layer = LayerNumber; //change the object layer to the holdLayer
             if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = heldObj.GetComponent<MinigameTracker>().minigameName;
             //make sure object doesnt collide with player, it can cause weird bugs
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
+        }
+        if (heldObj != null)
+        {
+            heldObjRb.transform.localEulerAngles = new Vector3(0, 0, 0);
+            heldObjRb.transform.localPosition = new Vector3(0, 0, 0);
         }
     }
     void DropObject()
@@ -109,7 +112,7 @@ public class PickUp : MonoBehaviour
             heldObj.layer = 0; //object assigned back to default layer
             heldObjRb.isKinematic = false;
             heldObj.transform.parent = null; //unparent object
-            Destroy(holdPosCpy);
+            //Destroy(holdPosCpy);
             heldObj = null; //undefine game object
         }
     }
@@ -117,7 +120,7 @@ public class PickUp : MonoBehaviour
     void MoveObject()
     {
         //keep object position the same as the holdPosition position
-        heldObj.transform.position = holdPosCpy.transform.position;
+        heldObj.transform.position = holdPos.transform.position;
     }
 
     void RotateObject()
@@ -149,14 +152,14 @@ public class PickUp : MonoBehaviour
         {
             heldObj.transform.Rotate(0, 0.5f, 0);
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 )
-        {
-            holdPosCpy.transform.Translate(Vector3.forward * 50 * Time.deltaTime);
-        }
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            holdPosCpy.transform.Translate(Vector3.forward * -50 * Time.deltaTime);
-        }
+        //if (Input.GetAxis("Mouse ScrollWheel") > 0 )
+        //{
+        //    holdPosCpy.transform.Translate(Vector3.forward * 50 * Time.deltaTime);
+        //}
+        //else if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        //{
+        //    holdPosCpy.transform.Translate(Vector3.forward * -50 * Time.deltaTime);
+        //}
     }
     void ThrowObject()
     {
@@ -167,7 +170,7 @@ public class PickUp : MonoBehaviour
         heldObjRb.isKinematic = false;
         heldObj.transform.parent = null;
         heldObjRb.AddForce(transform.forward * throwForce);
-        Destroy(holdPosCpy);
+        //Destroy(holdPosCpy);
         heldObj = null;
     }
     void PlaceObject(GameObject placePosition)
@@ -175,10 +178,10 @@ public class PickUp : MonoBehaviour
         if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
-        heldObj.transform.parent = placePosition.transform;
-        heldObj.transform.localPosition = new Vector3(8,1,0);
-        heldObj.transform.localEulerAngles = new Vector3(0,90,0);
-        Destroy(holdPosCpy);
+        heldObj.transform.parent = null;
+        heldObj.transform.localPosition = new Vector3(-1.98f, 1.766f, -0.6849f);
+        heldObj.transform.localEulerAngles = new Vector3(0, 5.94f, 0);
+        //Destroy(holdPosCpy);
         heldObj = null;
     }
     void StopClipping() //function only called when dropping/throwing

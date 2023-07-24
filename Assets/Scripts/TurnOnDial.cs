@@ -29,6 +29,7 @@ public class TurnOnDial : MonoBehaviour
                     {
                         canTurn = true;
                         dial.Rotate(0, 190, 0);
+                        particles.gameObject.SetActive(true);
                         particles.Play();
                     }
                     else
@@ -40,5 +41,10 @@ public class TurnOnDial : MonoBehaviour
                 }
             }
         }
+    }
+    IEnumerator WaitForFlameToStop()
+    {
+        yield return new WaitForSeconds(1);
+        particles.gameObject.SetActive(false);
     }
 }
