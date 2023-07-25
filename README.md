@@ -17,7 +17,7 @@ Jocul incepe cu scena "Laborator" unde jucatorul se poate misca liber si poate i
 
 ![lab](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Laboraor%20Preview.gif)
 
-## 2.Compusii chimici Peste 30 de compusi chimici cu denumirea lor.
+## 2.Compusii chimici, Peste 30 de compusi chimici cu denumirea lor.
 Acest joculet este accesat prin masa din capatul laboratorului la care poti spawna in laborator compusi chimici pentru a le vedea modelul 3D. Se bazeaza pe o mecanica de Drag and Drop adica vom face legatura dintre formula si numele ei.
 
 ![molecule](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Molecule%20Preview.gif) ![joculet](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Joculet%20Preview.gif)
