@@ -20,7 +20,7 @@ Jocul incepe cu scena "Laborator" unde jucatorul se poate misca liber si poate i
 2.  Compusii chimici Peste 30 de compusi chimici cu denumirea lor.
 Acest joculet este accesat prin masa din capatul laboratorului la care poti spawna in laborator compusi chimici pentru a le vedea modelul 3D. Se bazeaza pe o mecanica de Drag and Drop adica vom face legatura dintre formula si numele ei.
 
-![molecule](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Molecule%20Preview.gif)
+![molecule](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Molecule%20Preview.gif) ![joculet](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Joculet%20Preview.gif)
 
 3.  Adevarat si Fals
 Peste 40 de intrebari din materia de liceu si din cultura generala
@@ -35,4 +35,6 @@ Toate cele 40 de intrebari sunt verificate de catre profesorul meu de chimie de 
     
 5.Labirint
 In acest joculet trebuie ca jucatorul sa ghideze lichidul pana la final, avand grija sa nu il polueze de alung. Este integrat un sistem de procente care calculeaza cat la % apa a fost contaminata si iti va oferi un mesaj corespunzator. Fluidul se si coloreaza la contact cu substantele, pentru efect vizual.
+
+![labirint](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Labirint%20Preview.gif)
 
