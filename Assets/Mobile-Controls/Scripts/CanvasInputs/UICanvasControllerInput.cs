@@ -6,7 +6,7 @@ public class UICanvasControllerInput : MonoBehaviour
     [Header("Output")]
     public FPSControler inputs;
     public PickUpMobile pickUp;
-    public scenemanager scenemanager;
+    public SceneManagerScript scenemanager;
     public TurnOnDialMobile turnOnDial;
     public NewBehaviourScript1 area;
 

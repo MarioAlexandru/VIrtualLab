@@ -35,6 +35,8 @@ public class MazeManager : MonoBehaviour
     {
         solver.OnCollision += Solver_OnCollision;
         emitter.OnEmitParticle += Emitter_OnEmitParticle;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void OnDestroy()

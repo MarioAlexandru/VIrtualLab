@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class NewBehaviourScript1 : MonoBehaviour
 {
     FPSControler playerController;
+    public SceneManagerScript scenes;
 
     public GameObject canvas;
     public GameObject player;
+    
     public GameObject playStoreButton= null;
     public GameObject openStoreButton = null;
     public GameObject closeStoreButton = null;
@@ -40,6 +42,7 @@ public class NewBehaviourScript1 : MonoBehaviour
                         Cursor.lockState = CursorLockMode.Locked;
                         Cursor.visible = false;
                         menuIsShowing = false;
+                        scenes.minigameName = "";
                     }
                     else
                     {
@@ -48,6 +51,7 @@ public class NewBehaviourScript1 : MonoBehaviour
                         Cursor.lockState = CursorLockMode.None;
                         Cursor.visible = true;
                         menuIsShowing = true;
+                        scenes.minigameName = "Joculet";
                     }
                 }
             }
@@ -56,6 +60,7 @@ public class NewBehaviourScript1 : MonoBehaviour
                 canvas.SetActive(false);
                 playerController.lookSpeed = 2f;
                 menuIsShowing = false;
+                scenes.minigameName = "";
             }
         }
         else
@@ -103,7 +108,7 @@ public class NewBehaviourScript1 : MonoBehaviour
                 openStoreButton.SetActive(true);
                 openShopMobile = false;
             }
-        }    
+        }
     }
     public void OnTriggerExit(Collider other)
     {

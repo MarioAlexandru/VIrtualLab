@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class FPSControler : MonoBehaviour
     public Vector3 look;
     public bool isMobileEnabled;
 
-
+    [SerializeField]
     public float lookSpeed = 2f;
     public float lookXLimit = 90f;
 
@@ -104,7 +105,7 @@ public class FPSControler : MonoBehaviour
 
             if (canMove)
             {
-                lookSpeed = 0.01f;
+                lookSpeed = 0.03f;
                 rotationX += look.y * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
                 playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

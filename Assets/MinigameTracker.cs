@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MinigameTracker : MonoBehaviour
 {
-    public string minigameName;
+    public string minigame;
 }

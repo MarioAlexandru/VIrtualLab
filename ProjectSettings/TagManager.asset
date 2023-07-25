@@ -22,6 +22,9 @@ TagManager:
   - Flame
   - canTurn
   - placePos
+  - MaterialText
+  - MaterialButtonLayer
+  - experiment1
   layers:
   - Default
   - TransparentFX

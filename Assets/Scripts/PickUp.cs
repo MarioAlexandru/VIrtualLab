@@ -9,13 +9,14 @@ using UnityEngine.ProBuilder.MeshOperations;
 public class PickUp : MonoBehaviour
 {
     public GameObject player;
-    public scenemanager scenemanager;
+    public SceneManagerScript scenemanager;
     public Transform holdPos;
     public float throwForce = 500f;
     public float pickUpRange = 5f;
     private GameObject heldObj;
     private Rigidbody heldObjRb;
 
+    public string sceneName;
     private bool canDrop = false;
     private int LayerNumber;
 
@@ -23,7 +24,7 @@ public class PickUp : MonoBehaviour
     private LayerMask LayerMaskPlayer;
 
     [SerializeField]
-    private bool canThrow;
+    private bool canThrow = false;
 
     FPSControler mouseLookScript;
     void Start()
@@ -44,7 +45,6 @@ public class PickUp : MonoBehaviour
                     {
                         PickUpObject(hit.transform.gameObject);
                     }
-
                 }
             }
             else
@@ -86,7 +86,11 @@ public class PickUp : MonoBehaviour
             heldObjRb.isKinematic = true;
             heldObjRb.transform.parent = holdPos.transform;
             heldObj.layer = LayerNumber;
-            if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = heldObj.GetComponent<MinigameTracker>().minigameName;
+            if (heldObj.GetComponent<MinigameTracker>() != null) sceneName = heldObj.GetComponent<MinigameTracker>().minigame;
+            //else
+            //{
+            //    Debug.Log("Failed");
+            //}
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
             canDrop = true;
         }
@@ -100,7 +104,7 @@ public class PickUp : MonoBehaviour
     {
         if (heldObj != null)
         {
-            if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
+            if (heldObj.GetComponent<MinigameTracker>() != null) sceneName = "";
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
             heldObj.layer = 0;
             heldObjRb.isKinematic = false;
@@ -133,7 +137,7 @@ public class PickUp : MonoBehaviour
     }
     void ThrowObject()
     {
-        if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
+        if (heldObj.GetComponent<MinigameTracker>() != null) sceneName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
         heldObjRb.isKinematic = false;
@@ -144,7 +148,7 @@ public class PickUp : MonoBehaviour
     }
     void PlaceObject(GameObject placePosition)
     {
-        if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = "";
+        if (heldObj.GetComponent<MinigameTracker>() != null) sceneName = "";
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
         heldObj.transform.parent = null;

@@ -8,8 +8,8 @@ using TMPro;
 public class PickUpMobile : MonoBehaviour
 {
     public GameObject player;
-    public GameObject playButton;
-    public scenemanager scenemanager;
+    public GameObject playButton = null;
+    public SceneManagerScript scenemanager;
     public GameObject dropIcon;
     public GameObject grabIcon;
     public GameObject throwIcon;
@@ -105,10 +105,10 @@ public class PickUpMobile : MonoBehaviour
             canDropMobile = false;
             canPickupMobile = false;
             canThrowMobile = false;
-            if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = heldObj.GetComponent<MinigameTracker>().minigameName;
+            if (heldObj.GetComponent<MinigameTracker>() != null) scenemanager.minigameName = heldObj.GetComponent<MinigameTracker>().minigame;
             else
             {
-                if(scenemanager.minigameName == null) playButton.SetActive(true);
+                playButton.SetActive(false);
             }
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
             if(heldObj.GetComponent<SimpleTooltip>()) heldObj.GetComponent<SimpleTooltip>().ShowTooltip();
@@ -172,7 +172,7 @@ public class PickUpMobile : MonoBehaviour
         throwIcon.SetActive(false);
         dropIcon.SetActive(false);
         grabIcon.SetActive(true);
-        playButton.SetActive(false);
+        //playButton.SetActive(false);
         canPickupMobile = false;
         canDropMobile = false;
         canThrowMobile = false;
@@ -191,7 +191,7 @@ public class PickUpMobile : MonoBehaviour
         throwIcon.SetActive(false);
         dropIcon.SetActive(false);
         grabIcon.SetActive(true);
-        playButton.SetActive(false);
+        if (canPlay) playButton.SetActive(false);
         canPickupMobile = false;
         canDropMobile = false;
         canThrowMobile = false;

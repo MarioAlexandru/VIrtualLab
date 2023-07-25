@@ -44,8 +44,6 @@ public class DatabaseManager : MonoBehaviour
 
     public void CreateUser()
     {
-        //User newUser = new User(numeInput.text, (int)_timeManager.time, _puzzleManager.score);
-        //string json = JsonUtility.ToJson(newUser);
         string key = dbReference.Child("Leaderboard").Push().Key;
 
         LeaderboardEntry entry = new LeaderboardEntry(numeInput.text, _puzzleManager.score);
@@ -53,7 +51,6 @@ public class DatabaseManager : MonoBehaviour
 
         Dictionary<string, System.Object> childUpdates = new Dictionary<string, System.Object>();
         
-        //childUpdates["/scores/" + key] = entryValues;
         childUpdates["Leaderboard/" + key] = entryValues;
 
 
