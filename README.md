@@ -12,10 +12,9 @@ Pentru a putea lucra mai usor in echipa am mai folosit un system de gestionare a
 	Scene(Versiunea de PC):
 1.  Laborator
 Jocul incepe cu scena "Laborator" unde jucatorul se poate misca liber si poate interactiona cu mai multe obiecte (le poate lua in mana, le poate inspecta), explorandul vom da peste 4 alte joculete.
-![molecule](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Molecule%20Preview.gif)
 3.  Compusii chimici Peste 30 de compusi chimici cu denumirea lor.
 Acest joculet este accesat prin masa din capatul laboratorului la care poti spawna in laborator compusi chimici pentru a le vedea modelul 3D. Se bazeaza pe o mecanica de Drag and Drop adica vom face legatura dintre formula si numele ei.
-
+![molecule](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Molecule%20Preview.gif)
 4.  Adevarat si Fals
 Peste 40 de intrebari din materia de liceu si din cultura generala
 Toate cele 40 de intrebari sunt verificate de catre profesorul meu de chimie de la clasa. Are un design simplistic, dar eficient si plin de animatii atractive. Intrebarile sunt randomizate si jucatorul se poate juca pana cand doreste.
