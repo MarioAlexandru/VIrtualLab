@@ -2,11 +2,13 @@
 VirtualLab
 Linkul pentru versiunea VR: https://github.com/MarioAlexandru/VRLab
 
-   Am vrut sa ne bazam in primul rand pe chimie, nu doar pentru ca este materia care da furca multor elevi, dar pentru ca este un subiect care are toate implicatiile in viata reala, cu experimente, observatii...Asa ca am ales Unity, deoarece are multe module de aplicabilitate, Mobile, Desktop, VR.
+Am vrut sa ne bazam in primul rand pe chimie, nu doar pentru ca este materia care da furca multor elevi, dar pentru ca este un subiect care are toate implicatiile in viata reala, cu experimente, observatii...Asa ca am ales Unity, deoarece are multe module de aplicabilitate, Mobile, Desktop, VR.
 Acest repository contine si versiunea de mobil si cea de PC.
-    Tehnologii folosite:
+
+Tehnologii folosite:
 Firebase:
-Am folosit un Real time database de la Firebase pentru a stoca scorurile jucatorilor si a le afisa pe un clasament.
+Am folosit un Real time database de la Firebase pentru a stoca scorurile jucatorilor si a le afisa pe un clasament pe varianta de mobil variana de PC folosing PlayerPrefs pentru a stoca local scorurile jucatorilor.
+
 Unity Version Control:
 Pentru a putea lucra mai usor in echipa am mai folosit un system de gestionare a codului, Unity Version Control care este direct integrat.
 	Scene(Versiunea de PC):
@@ -23,9 +25,13 @@ Acest joculet este accesat prin masa din capatul laboratorului la care poti spaw
 3.  Adevarat si Fals
 Peste 40 de intrebari din materia de liceu si din cultura generala
 Toate cele 40 de intrebari sunt verificate de catre profesorul meu de chimie de la clasa. Are un design simplistic, dar eficient si plin de animatii atractive. Intrebarile sunt randomizate si jucatorul se poate juca pana cand doreste.
-4.  Experiment chimic
+
+![quiz](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Quiz%20Preview.gif)
+
+5.  Experiment chimic
      Folosind bucla metalică curățată, trebuie sa se ia un eșantion de sare metalică și așezați-l în flacăra becului Bunsen. Jucatorul va observa cu atenție culoarea flăcării, fiecare metal va produce o culoare specifică în flacără.
 
+![flames](https://github.com/MarioAlexandru/VirtualLab/blob/main/Assets/Gifs/Flame%20Preview.gif)
     
 5.Labirint
 In acest joculet trebuie ca jucatorul sa ghideze lichidul pana la final, avand grija sa nu il polueze de alung. Este integrat un sistem de procente care calculeaza cat la % apa a fost contaminata si iti va oferi un mesaj corespunzator. Fluidul se si coloreaza la contact cu substantele, pentru efect vizual.
