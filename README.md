@@ -7,7 +7,7 @@ Acest repository contine si versiunea de mobil si cea de PC.
 
 Tehnologii folosite:
 Firebase:
-Am folosit un Real time database de la Firebase pentru a stoca scorurile jucatorilor si a le afisa pe un clasament pe varianta de mobil variana de PC folosing PlayerPrefs pentru a stoca local scorurile jucatorilor.
+Am folosit un Real time database de la Firebase pentru a stoca scorurile jucatorilor si a le afisa pe un clasament pe varianta de mobil si pentru varianta de PC folosinm PlayerPrefs pentru a stoca local scorurile jucatorilor.
 
 Unity Version Control:
 Pentru a putea lucra mai usor in echipa am mai folosit un system de gestionare a codului, Unity Version Control care este direct integrat.
